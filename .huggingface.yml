@@ -1,0 +1,8 @@
+# .huggingface.yml
+title: OVLO PDF Service
+license: apache-2.0
+tags:
+  - pdf
+  - ovlo
+  - chatbot
+sdk: gradio
