@@ -186,7 +186,7 @@
           <td>{{ item.cycle_number }}</td>
           <td>{{ item.start_date }}</td>
           <td>{{ item.end_date }}</td>
-          <td>{{ item.duration }}</td>
+          <td>{{ item.duration }} Days</td>
           <td>{{ item.flow_intensity }}</td>
         </tr>
         {% endfor %}
@@ -260,7 +260,7 @@
     <h3>Mood Distribution</h3>
     <div class="mood-pie-grid">
       {% for item in mood_distribution %}
-      <div class="mood-block">{{ item.emoji }} {{ item.mood }} – {{ item.percentage }}</div>
+      <div class="mood-block">{{ item.emoji }} {{ item.mood }} – {{ item.percent }}</div>
       {% endfor %}
     </div>
   </div>

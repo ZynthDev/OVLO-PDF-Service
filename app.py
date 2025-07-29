@@ -37,12 +37,22 @@ async def generate_pdf_from_json(request: Request):
 
     # Render HTML from template using data
     rendered_html = template.render(
+        user_id=data.get("user_id", ""),
         date=data.get("date", ""),
-        customer=data.get("customer", {}),
-        items=data.get("items", []),
-        total=data.get("total", "0.00")
+        tracking_since=data.get("tracking_since", ""),
+        average_cycle_length=data.get("average_cycle_length", ""),
+        average_period_duration=data.get("average_period_duration", ""),
+        logged_cycles=data.get("logged_cycles", ""),
+        most_common_symptom=data.get("most_common_symptom", ""),
+        most_frequent_mood=data.get("most_frequent_mood", ""),
+        longest_cycle=data.get("longest_cycle", ""),
+        shortest_cycle=data.get("shortest_cycle", ""),
+        cycle_history=data.get("cycle_history", []),
+        symptom_logs=data.get("symptom_logs", []),
+        mood_logs=data.get("mood_logs", []),
+        most_common_symptoms=data.get("most_common_symptoms", []),
+        mood_distribution=data.get("mood_distribution", []),
     )
-
 
     pdf_io = BytesIO()
     HTML(string=rendered_html).write_pdf(target=pdf_io)
