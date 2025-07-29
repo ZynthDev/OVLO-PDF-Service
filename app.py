@@ -43,6 +43,7 @@ async def generate_pdf_from_json(request: Request):
         total=data.get("total", "0.00")
     )
 
+
     pdf_io = BytesIO()
     HTML(string=rendered_html).write_pdf(target=pdf_io)
     pdf_io.seek(0)
@@ -54,5 +55,5 @@ async def generate_pdf_from_json(request: Request):
     )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
 
