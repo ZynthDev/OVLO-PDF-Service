@@ -14,3 +14,9 @@ app.add_middleware(
 
 app.include_router(pdf.router, prefix="/pdf", tags=["PDF"])
 app.include_router(csv.router, prefix="/csv", tags=["CSV"])
+
+@router.post("/")
+async def root():
+    return {
+        "message": "Hello World"
+    }
