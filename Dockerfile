@@ -51,9 +51,16 @@ RUN apt-get update && apt-get install -y \
     curl \
     fontconfig \
     fonts-noto-color-emoji \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libcairo2 \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    libgobject-2.0-0 \
  && chmod -R a+r /usr/share/fonts \
  && fc-cache -f -v \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # Create non-root user
 RUN useradd -m -u 1000 user
