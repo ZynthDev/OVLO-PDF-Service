@@ -1,62 +1,44 @@
-## OVLO PDF Service
+---
+title: OVLO PDF Service
+emoji: 🧾
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: "3.39.0"
+app_file: app.py
+pinned: false
+---
 
-OVLO PDF Service is a microservice designed to generate PDFs from HTML or JSON input, suitable for rendering templates and exporting user data in a visually appealing format. It utilizes FastAPI along with WeasyPrint and Jinja2 for rendering and generating PDFs.
+> Check out the configuration reference at [huggingface.co/docs/hub/spaces-config-reference](https://huggingface.co/docs/hub/spaces-config-reference)
 
-### Features
+# 🧾 OVLO PDF Service
 
-- Convert uploaded HTML files to PDF.
-- Generate PDF from JSON data using pre-defined HTML templates.
-- RESTful endpoints for handling PDF generation.
-- Dockerized for seamless deployment and scalability.
+The **OVLO PDF Service** is a microservice designed to generate high-quality PDFs from HTML or structured JSON data. It’s perfect for rendering user data, reports, or logs into printable formats using Jinja2 templating and WeasyPrint.
 
-### Installation
+---
 
-#### Prerequisites
+## ✨ Features
 
-- **Python 3.10+**: Ensure Python is installed on your system.
-- **Docker**: Required for running the microservice in a containerized environment.
+- 📄 Convert uploaded HTML files directly to PDF
+- 🧩 Generate dynamic PDFs from JSON using pre-defined templates
+- ⚙️ RESTful FastAPI endpoints for easy integration
+- 🐳 Docker support for quick deployment and scaling
 
-#### Steps
+---
 
-1. **Clone the repository**: 
-   ```bash
-   git clone <repository-url>
-   cd OVLO-PDF-Service
-   ```
+## 🚀 Getting Started
 
-2. **Install dependencies**: 
-   Using pip:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 🧰 Prerequisites
 
-3. **Build Docker Image**:
-   ```bash
-   docker build -t ovlo-pdf-service .
-   ```
+- Python 3.10+
+- Docker (optional, for containerized use)
 
-### Usage
+---
 
-Run the service locally using Uvicorn:
+### 🔧 Installation
+
+1. **Clone the repository**
+
 ```bash
-uvicorn app:app --reload
-```
-
-Run using Docker:
-```bash
-docker run -p 7860:7860 ovlo-pdf-service
-```
-
-### API Endpoints
-
-- **GET /**: Welcome message discussing functionalities.
-- **POST /generate-pdf**: Upload an HTML file to generate a PDF.
-- **POST /generate-pdf-from-json**: Send JSON data to create a PDF based on the `ovlo_template.html`.
-
-### Template Customization
-
-Modify `ovlo_template.html` to match your visual and data structure requirements. The template is powered by Jinja2 allowing dynamic rendering based on provided data.
-
-### License
-
-MIT License - see [LICENSE](LICENSE) file for details.
+git clone <repository-url>
+cd OVLO-PDF-Service
