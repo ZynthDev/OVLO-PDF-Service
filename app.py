@@ -70,8 +70,8 @@ async def generate_pdf_from_json(request: Request):
     )
 
 
-@app.post("/download-csvs")
-async def download_csvs(request: Request):
+@app.post("/generate-csvs-from-json")
+async def generate_csvs_from_json(request: Request):
     data = await request.json()
 
     # Metadata
@@ -92,7 +92,8 @@ async def download_csvs(request: Request):
         "mood_distribution": data.get("mood_distribution", [])
     }
 
-    # Create ZIP file in memory
+
+    # Create ZIP file
     zip_buffer = BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
         for section, records in sections.items():
@@ -105,7 +106,6 @@ async def download_csvs(request: Request):
             csv_bytes = df.to_csv(index=False).encode("utf-8")
             zip_file.writestr(f"{section}.csv", csv_bytes)
 
-    # Save to disk temporarily (or return from memory)
     zip_path = "user_data_sections.zip"
     with open(zip_path, "wb") as f:
         f.write(zip_buffer.getvalue())
