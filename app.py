@@ -28,7 +28,8 @@ async def generate_pdf(file: UploadFile = File(...)):
     return StreamingResponse(
         pdf_io,
         media_type="application/pdf",
-        headers={"Content-Disposition": f"inline; filename={file.filename.replace('.html', '.pdf')}"}
+        headers={"Content-Disposition": f"inline; filename={file.filename.replace('.html', '.pdf')}"},
+        status_code=201
     )
 
 @app.post("/generate-pdf-from-json")
@@ -61,7 +62,8 @@ async def generate_pdf_from_json(request: Request):
     return StreamingResponse(
         pdf_io,
         media_type="application/pdf",
-        headers={"Content-Disposition": "inline; filename=file.pdf"}
+        headers={"Content-Disposition": "inline; filename=file.pdf"},
+        status_code=201
     )
 
 if __name__ == "__main__":
