@@ -56,7 +56,7 @@ RUN apt-get update && apt-get install -y \
     libcairo2 \
     libgdk-pixbuf2.0-0 \
     libffi-dev \
-    libgobject-2.0-0 \
+    libglib2.0-0 \
  && chmod -R a+r /usr/share/fonts \
  && fc-cache -f -v \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
