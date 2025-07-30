@@ -28,4 +28,4 @@ def generate_csv_zip_from_json(data):
     with open(zip_path, "wb") as f:
         f.write(zip_buffer.getvalue())
 
-    return FileResponse(zip_path, media_type="application/zip", filename="user_data_sections.zip")
+    return FileResponse(zip_path, media_type="application/zip", filename="user_data_sections.zip", status_code=201)

@@ -5,7 +5,6 @@ from app.routes import pdf, csv
 app = FastAPI()
 router = APIRouter()
 
-# Optional: Add CORS if needed
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,7 +15,7 @@ app.add_middleware(
 app.include_router(pdf.router, prefix="/pdf", tags=["PDF"])
 app.include_router(csv.router, prefix="/csv", tags=["CSV"])
 
-@router.post("/")
+@router.get("/")
 async def root():
     return {
         "message": "Hello World"

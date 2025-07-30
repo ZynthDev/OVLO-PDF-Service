@@ -13,11 +13,11 @@ async def generate_pdf_from_html(file):
     pdf_io = BytesIO()
     HTML(string=html_bytes.decode("utf-8")).write_pdf(target=pdf_io)
     pdf_io.seek(0)
-    return StreamingResponse(pdf_io, media_type="application/pdf")
+    return StreamingResponse(pdf_io, media_type="application/pdf", status_code=201)
 
 def generate_pdf_from_json_data(data):
     rendered_html = template.render(**data)
     pdf_io = BytesIO()
     HTML(string=rendered_html).write_pdf(target=pdf_io)
     pdf_io.seek(0)
-    return StreamingResponse(pdf_io, media_type="application/pdf")
+    return StreamingResponse(pdf_io, media_type="application/pdf", status_code=201)
