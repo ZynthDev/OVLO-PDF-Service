@@ -25,7 +25,7 @@ WORKDIR /app
 COPY --chown=user ./requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir --no-compile --user -r requirements.txt
 
-COPY --chown=user . /app
+COPY --chown=user ./app /app
 
 RUN find /home/user/.local -type d -name "__pycache__" -exec rm -rf {} + \
  && find /home/user/.local -type f -name "*.py[co]" -delete
