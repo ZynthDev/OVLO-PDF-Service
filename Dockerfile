@@ -31,5 +31,14 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # Copy the rest of the app
 COPY --chown=user . /app
 
+RUN apt-get update && apt-get install -y \
+    fonts-noto-color-emoji \
+    fonts-noto-core \
+    fonts-dejavu-core \
+    fontconfig \
+ && fc-cache -f -v \
+ && rm -rf /var/lib/apt/lists/*
+
+
 # Default command
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
