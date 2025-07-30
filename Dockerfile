@@ -6,6 +6,7 @@ USER root
 RUN apt-get update && apt-get install -y \
     fonts-noto-color-emoji \
     fontconfig \
+ && fc-cache -f -v \
  && rm -rf /var/lib/apt/lists/*
 
 # Switch back to non-root user
