@@ -1,36 +1,77 @@
-FROM python:3.10
+# ====================
+# Stage 1: Build Layer
+# ====================
+FROM python:3.10-slim AS build
 
-# Force rebuild (cache busting for Hugging Face)
-LABEL rebuild="2025-07-30"
+LABEL stage="build"
 
-# Install system packages and fonts
 USER root
+
+# Install build dependencies and minimal fonts
 RUN apt-get update && apt-get install -y \
-    fonts-noto-color-emoji \
-    fonts-noto-core \
-    fonts-dejavu-core \
+    build-essential \
+    curl \
     fontconfig \
+    fonts-noto-color-emoji \
  && chmod -R a+r /usr/share/fonts \
  && fc-cache -f -v \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user
 RUN useradd -m -u 1000 user
 USER user
 
-# Rebuild font cache as user to ensure visibility
-RUN fc-cache -f -v
-
-# Set environment and working directory
+# Set up environment
 ENV PATH="/home/user/.local/bin:$PATH"
 WORKDIR /app
 
 # Install Python dependencies
-COPY --chown=user ./requirements.txt requirements.txt
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+COPY --chown=user ./requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir --no-compile --user -r requirements.txt
 
-# Copy app source code
+# Copy full app source code (excluding .venv via .dockerignore)
 COPY --chown=user . /app
 
-# Default command (adjust if you're using Streamlit or something else)
+# Clean build env (pycache, .pyc)
+RUN find /home/user/.local -type d -name "__pycache__" -exec rm -rf {} + \
+ && find /home/user/.local -type f -name "*.py[co]" -delete
+
+
+# ====================
+# Stage 2: Final Slim Runtime
+# ====================
+FROM python:3.10-slim AS runtime
+
+LABEL rebuild="2025-07-30"
+
+USER root
+
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y \
+    curl \
+    fontconfig \
+    fonts-noto-color-emoji \
+ && chmod -R a+r /usr/share/fonts \
+ && fc-cache -f -v \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user
+RUN useradd -m -u 1000 user
+USER user
+
+# Set up environment
+ENV PATH="/home/user/.local/bin:$PATH"
+WORKDIR /app
+
+# Copy user packages and app from build stage
+COPY --from=build --chown=user /home/user/.local /home/user/.local
+COPY --from=build --chown=user /app /app
+
+# Extra cleanup just in case
+RUN rm -rf /app/.venv \
+ && find /home/user/.local -type d -name "__pycache__" -exec rm -rf {} + \
+ && find /home/user/.local -type f -name "*.py[co]" -delete \
+ && fc-cache -f -v
+
+# Start the app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
