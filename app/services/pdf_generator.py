@@ -4,7 +4,7 @@ from io import BytesIO
 from jinja2 import Environment, FileSystemLoader
 import os
 
-TEMPLATE_DIR = os.path.join(os.getcwd(), "app", "templates")
+TEMPLATE_DIR = os.path.join(os.getcwd(), "app/templates")
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 template = env.get_template("ovlo_template.html")
 
