@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import pdf, csv
 
 app = FastAPI()
+router = APIRouter()
 
 # Optional: Add CORS if needed
 app.add_middleware(
