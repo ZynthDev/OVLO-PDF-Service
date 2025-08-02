@@ -1,9 +1,11 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 from app.routes import pdf, csv
 
 app = FastAPI()
-router = APIRouter()
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,10 +17,14 @@ app.add_middleware(
 app.include_router(pdf.router, prefix="/pdf", tags=["PDF"])
 app.include_router(csv.router, prefix="/csv", tags=["CSV"])
 
-@router.get("/")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse("static/favicon.ico")
+
+@app.get("/")
 async def root():
     return {
         "message": "Hello World"
     }
-
-app.include_router(router)

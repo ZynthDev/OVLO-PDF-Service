@@ -1,4 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Request
+
 from app.services.pdf_generator import generate_pdf_from_html, generate_pdf_from_json_data
 
 router = APIRouter()

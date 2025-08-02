@@ -4,11 +4,17 @@ import pandas as pd
 import zipfile
 
 def generate_csv_zip_from_json(data):
+    options = data.get("options", "111")
+
+    data["show_cycles"] = options[0] == "1"
+    data["show_symptoms"] = options[1] == "1"
+    data["show_mood"] = options[2] == "1"
+
     metadata = {k: data.get(k, "") for k in ["user_id", "date", "logged_cycles", "most_common_symptom", "most_frequent_mood"]}
     sections = {
-        "cycle_history": data.get("cycle_history", []),
-        "symptom_logs": data.get("symptom_logs", []),
-        "mood_logs": data.get("mood_logs", []),
+        "cycle_history": data.get("cycle_history", []) if options[0] == "1" else [],
+        "symptom_logs": data.get("symptom_logs", [])if options[1] == "1" else [],
+        "mood_logs": data.get("mood_logs", []) if options[2] == "1" else [],
         "most_common_symptoms": data.get("most_common_symptoms", []),
         "mood_distribution": data.get("mood_distribution", [])
     }

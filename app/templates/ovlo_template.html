@@ -1,267 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ovlo Export</title>
-  <style>
-    @page {
-      margin: 0;
-    }
-    :root {
-      --pink-dark: #D94F70;
-      --pink: #F8ADD5;
-      --pink-light: #FDECEF;
-      --gray-light: #f9f9fb;
-      --text-dark: #333;
-      --text-muted: #777;
-    }
+    <head>
+      <meta charset="UTF-8">
+      <title>Ovlo Export</title>
+      <style>
+        @page {
+          margin: 0;
+        }
+        :root {
+          --pink-dark: #D94F70;
+          --pink: #F8ADD5;
+          --pink-light: #FDECEF;
+          --gray-light: #f9f9fb;
+          --text-dark: #333;
+          --text-muted: #777;
+        }
 
-    body {
-      margin: 0;
-      padding: 40px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--gray-light);
-      color: var(--text-dark);
-    }
+        body {
+          margin: 0;
+          padding: 40px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: var(--gray-light);
+          color: var(--text-dark);
+        }
 
-    .container {
-      max-width: 960px;
-      margin: auto;
-    }
+        .container {
+          max-width: 960px;
+          margin: auto;
+        }
 
-    h1 {
-      font-size: 32px;
-      color: var(--pink-dark);
-      margin-bottom: 8px;
-    }
+        h1 {
+          font-size: 32px;
+          color: var(--pink-dark);
+          margin-bottom: 8px;
+        }
 
-    h2 {
-      font-size: 22px;
-      color: var(--text-dark);
-      border-bottom: 2px solid var(--pink-light);
-      padding-bottom: 5px;
-      margin-top: 40px;
-    }
+        h2 {
+          font-size: 22px;
+          color: var(--text-dark);
+          border-bottom: 2px solid var(--pink-light);
+          padding-bottom: 5px;
+          margin-top: 40px;
+        }
 
-    h3 {
-      font-size: 18px;
-      color: var(--pink-dark);
-      margin-bottom: 12px;
-    }
+        h3 {
+          font-size: 18px;
+          color: var(--pink-dark);
+          margin-bottom: 12px;
+        }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      padding: 20px;
-      margin-top: 20px;
-    }
+        .card {
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+          padding: 20px;
+          margin-top: 20px;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-    }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 16px;
+        }
 
-    th, td {
-      border: 1px solid #e6d8dc;
-      padding: 12px;
-      text-align: left;
-    }
+        th, td {
+          border: 1px solid #e6d8dc;
+          padding: 12px;
+          text-align: left;
+        }
 
-    th {
-      background-color: var(--pink-light);
-      color: var(--pink-dark);
-      font-weight: 600;
-    }
+        th {
+          background-color: var(--pink-light);
+          color: var(--pink-dark);
+          font-weight: 600;
+        }
 
-    .chart-bar {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+        .chart-bar {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+        }
 
-    .bar-label {
-      width: 60px;
-      font-weight: 500;
-      font-size: 14px;
-    }
+        .bar-label {
+          width: 60px;
+          font-weight: 500;
+          font-size: 14px;
+        }
 
-    .bar-value {
-      flex: 1;
-      background-color: var(--pink);
-      color: white;
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-size: 13px;
-    }
+        .bar-value {
+          flex: 1;
+          background-color: var(--pink);
+          color: white;
+          border-radius: 4px;
+          padding: 4px 10px;
+          font-size: 13px;
+        }
 
-    .list-chart {
-      list-style: none;
-      padding-left: 0;
-      font-size: 14px;
-    }
+        .list-chart {
+          list-style: none;
+          padding-left: 0;
+          font-size: 14px;
+        }
 
-    .list-chart li {
-      display: flex;
-      align-items: center;
-      margin: 6px 0;
-    }
+        .list-chart li {
+          display: flex;
+          align-items: center;
+          margin: 6px 0;
+        }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
 
-    .pink { background-color: var(--pink-dark); }
-    .pink-light { background-color: var(--pink); }
-    .lightest { background-color: #FBD2E0; }
+        .pink { background-color: var(--pink-dark); }
+        .pink-light { background-color: var(--pink); }
+        .lightest { background-color: #FBD2E0; }
 
-    .mood-pie-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+        .mood-pie-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
 
-    .mood-block {
-      border-left: 5px solid var(--pink);
-      padding: 12px 16px;
-      border-radius: 6px;
-      background-color: #fff8fb;
-    }
+        .mood-block {
+          border-left: 5px solid var(--pink);
+          padding: 12px 16px;
+          border-radius: 6px;
+          background-color: #fff8fb;
+        }
 
-    .footer-note {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-top: 60px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
-  <div class="card">
-    <h1>Ovlo Tracker</h1>
-    <p><strong>User ID:</strong> {{ user_id }}</p>
-    <p><strong>Export Date:</strong> {{ date }}</p>
-  </div>
+        .footer-note {
+          text-align: center;
+          color: var(--text-muted);
+          font-size: 14px;
+          margin-top: 60px;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="container">
+          <div class="card">
+            <h1>Ovlo Tracker</h1>
+            <p><strong>User ID:</strong> {{ user_id }}</p>
+            <p><strong>Export Date:</strong> {{ date }}</p>
+          </div>
 
-  <h2>Summary</h2>
-  <div class="card">
-    <p><strong>Tracking Since:</strong> {{ tracking_since }}</p>
-    <p><strong>Average Cycle Length:</strong> {{ average_cycle_length }} days</p>
-    <p><strong>Average Period Duration:</strong> {{ average_period_duration }} days</p>
-    <p><strong>Total Logged Cycles:</strong> {{ logged_cycles }}</p>
-  </div>
+          <h2>Summary</h2>
+          <div class="card">
+            <p><strong>Tracking Since:</strong> {{ tracking_since }}</p>
+            <p><strong>Average Cycle Length:</strong> {{ average_cycle_length }} days</p>
+            <p><strong>Average Period Duration:</strong> {{ average_period_duration }} days</p>
+            <p><strong>Total Logged Cycles:</strong> {{ logged_cycles }}</p>
+          </div>
 
-  <h2>Insights 📊</h2>
-  <div class="card">
-    <p><strong>Most Common Symptom:</strong> {{ most_common_symptom }}</p>
-    <p><strong>Most Frequent Mood:</strong> {{ most_frequent_mood }}</p>
-    <p><strong>Longest Cycle:</strong> {{ longest_cycle }}</p>
-    <p><strong>Shortest Cycle:</strong> {{ shortest_cycle }}</p>
-  </div>
+          <h2>Insights 📊</h2>
+          <div class="card">
+            <p><strong>Most Common Symptom:</strong> {{ most_common_symptom }}</p>
+            <p><strong>Most Frequent Mood:</strong> {{ most_frequent_mood }}</p>
+            <p><strong>Longest Cycle:</strong> {{ longest_cycle }}</p>
+            <p><strong>Shortest Cycle:</strong> {{ shortest_cycle }}</p>
+          </div>
+            {% if show_cycles %}
+          <h2>Cycle History 📅</h2>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cycle #</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Duration</th>
+                  <th>Flow Intensity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cycle_history %}
+                <tr>
+                  <td>{{ item.cycle_number }}</td>
+                  <td>{{ item.start_date }}</td>
+                  <td>{{ item.end_date }}</td>
+                  <td>{{ item.duration }} Days</td>
+                  <td>{{ item.flow_intensity }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+            {% endif %}
 
-  <h2>Cycle History 📅</h2>
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>Cycle #</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Duration</th>
-          <th>Flow Intensity</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in cycle_history %}
-        <tr>
-          <td>{{ item.cycle_number }}</td>
-          <td>{{ item.start_date }}</td>
-          <td>{{ item.end_date }}</td>
-          <td>{{ item.duration }} Days</td>
-          <td>{{ item.flow_intensity }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+            {% if show_symptoms %}
+          <h2>Symptom Logs 💊</h2>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Symptoms</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in symptom_logs %}
+                <tr>
+                  <td>{{ item.date }}</td>
+                  <td>{{ item.symptoms }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+            {% endif %}
 
-  <h2>Symptom Logs 💊</h2>
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Symptoms</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in symptom_logs %}
-        <tr>
-          <td>{{ item.date }}</td>
-          <td>{{ item.symptoms }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+            {% if show_mood %}
+          <h2>Mood Logs 🙂</h2>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Mood</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in mood_logs %}
+                <tr>
+                  <td>{{ item.date }}</td>
+                  <td>{{ item.mood }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+            {% endif %}
 
-  <h2>Mood Logs 🙂</h2>
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Mood</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in mood_logs %}
-        <tr>
-          <td>{{ item.date }}</td>
-          <td>{{ item.mood }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+          <h2>Visual Insights 📈</h2>
+          <div class="card">
+            <h3>Cycle Duration Overview</h3>
+            <div class="chart-bar"><div class="bar-label">Jan</div><div class="bar-value" style="width: 70%">28 days</div></div>
+            <div class="chart-bar"><div class="bar-label">Feb</div><div class="bar-value" style="width: 80%">32 days</div></div>
+            <div class="chart-bar"><div class="bar-label">Mar</div><div class="bar-value" style="width: 65%">26 days</div></div>
+          </div>
 
-  <h2>Visual Insights 📈</h2>
-  <div class="card">
-    <h3>Cycle Duration Overview</h3>
-    <div class="chart-bar"><div class="bar-label">Jan</div><div class="bar-value" style="width: 70%">28 days</div></div>
-    <div class="chart-bar"><div class="bar-label">Feb</div><div class="bar-value" style="width: 80%">32 days</div></div>
-    <div class="chart-bar"><div class="bar-label">Mar</div><div class="bar-value" style="width: 65%">26 days</div></div>
-  </div>
+          {% set classes = ['pink', 'pink-light', 'lightest'] %}
 
-  {% set classes = ['pink', 'pink-light', 'lightest'] %}
+          <div class="card">
+            <h3>Most Common Symptoms</h3>
+            <ul class="list-chart">
+              {% for item in most_common_symptoms %}
+              <li>
+                <span class="dot {{ classes[loop.index0] }}"></span>
+                {{ item.symptom }} – {{ item.label }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-  <div class="card">
-    <h3>Most Common Symptoms</h3>
-    <ul class="list-chart">
-      {% for item in most_common_symptoms %}
-      <li>
-        <span class="dot {{ classes[loop.index0] }}"></span>
-        {{ item.symptom }} – {{ item.label }}
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+          <div class="card">
+            <h3>Mood Distribution</h3>
+            <div class="mood-pie-grid">
+              {% for item in mood_distribution %}
+              <div class="mood-block">{{ item.emoji }} {{ item.mood }} – {{ item.percent }}</div>
+              {% endfor %}
+            </div>
+          </div>
 
-  <div class="card">
-    <h3>Mood Distribution</h3>
-    <div class="mood-pie-grid">
-      {% for item in mood_distribution %}
-      <div class="mood-block">{{ item.emoji }} {{ item.mood }} – {{ item.percent }}</div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <p class="footer-note">Generated by Ovlo App — For personal use only.</p>
-</div>
-</body>
+          <p class="footer-note">Generated by Ovlo App — For personal use only.</p>
+        </div>
+    </body>
 </html>
